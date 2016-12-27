@@ -1,5 +1,10 @@
-#include <iostream>
+#include "benchmark/benchmark_api.h"
 
-int main() {
-    std::cout << "potatko." << std::endl;
+
+void BM_testing(benchmark::State& state) {
+    std::vector<int> s;
+    s.reserve(5000);
 }
+BENCHMARK(BM_testing);
+
+BENCHMARK_MAIN()

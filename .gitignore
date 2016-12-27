@@ -1,6 +1,15 @@
 CMakeCache.txt
 CMakeFiles/*
 .idea/*
+/build/
+
+CMakeCache.txt
+cmake*
+Makefile
+conaninfo.txt
+conanbuildinfo.cmake
+
+*.cbp
 # Compiled Object files
 *.slo
 *.lo
