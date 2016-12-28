@@ -33,4 +33,5 @@ Rust_tree_lookup/1000             220 ns        220 ns    2890813
 Rust_tree_lookup/9.76562k         307 ns        307 ns    2508133
 Rust_tree_lookup/97.6562k         362 ns        362 ns    2035671
 Rust_tree_lookup/976.562k         442 ns        441 ns    1636130
-```
+```  
+Rust_tree_lookup has some overhead since the libraries are being invoked from C code into Rust, and there is minor overhead of that in between, my experience indicates around 50 ns overhead.
