@@ -2,6 +2,7 @@ CMakeCache.txt
 CMakeFiles/*
 .idea/*
 /build/
+/bin
 
 CMakeCache.txt
 cmake*

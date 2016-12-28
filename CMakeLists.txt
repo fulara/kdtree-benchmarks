@@ -9,8 +9,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wno-deprecated-declarations 
 
 include_directories(deps/include/libkdtree_rust_c_api)
 
-set(SOURCE_FILES src/main.cpp)
+set(SOURCE_FILES src/main.cpp src/Kdtree3Cgal.cpp src/Kdtree3Cgal.h)
 link_directories(deps/libs/)
 
 add_executable(kdtree_benchmarks ${SOURCE_FILES} ${TEST_SOURCE_FILES})
-target_link_libraries(kdtree_benchmarks kdtree_rust_c_api ${CONAN_LIBS} pthread)
+target_link_libraries(kdtree_benchmarks kdtree_rust_c_api ${CONAN_LIBS} boost_system CGAL pthread)
