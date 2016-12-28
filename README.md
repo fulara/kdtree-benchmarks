@@ -1,6 +1,6 @@
 # kdtree-benchmarks
 Benchmarking implementation of  Kdtree implementations. Currently only CGAL and mine  
-[mine](https://github.com/fulara/kdtree-rust) with [c-api](https://github.com/fulara/kdtree-rust-c-api)
+[mine](https://github.com/fulara/kdtree-rust) with [c-api](https://github.com/fulara/kdtree-rust-c-api)  
 [CGAL](http://www.cgal.org/)  
 
 The version of the repo is not really to be easily used.. :)  
