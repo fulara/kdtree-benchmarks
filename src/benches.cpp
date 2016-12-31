@@ -64,7 +64,7 @@ void Rust_tree_buildup(benchmark::State& state) {
     std::vector<Point3WithId> nodes;
 
     for (auto i = 0u; i < count; ++i) {
-        nodes.push_back(Point3WithId{(int)i, rg.random_double(0, count), rg.random_double(0, count), rg.random_double(0, count)});
+        nodes.push_back(Point3WithId{reinterpret_cast<void*>(i), rg.random_double(0, count), rg.random_double(0, count), rg.random_double(0, count)});
     }
 
     while(state.KeepRunning()) {
@@ -80,7 +80,7 @@ void Rust_tree_lookup(benchmark::State& state) {
     const unsigned count = (const unsigned int) state.range(0);
 
     for (auto i = 0u; i < count; ++i) {
-        nodes.push_back(Point3WithId{(int)i, rg.random_double(0, count), rg.random_double(0, count), rg.random_double(0, count)});
+        nodes.push_back(Point3WithId{reinterpret_cast<void*>(i), rg.random_double(0, count), rg.random_double(0, count), rg.random_double(0, count)});
     }
 
     kdtree_create(nodes.data(), count);

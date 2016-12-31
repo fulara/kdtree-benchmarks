@@ -21,7 +21,7 @@ TEST(KdtreeTests, RustAndCgalTreesGiveTheSameResults) {
         auto y = rg.random_double(0, count);
         auto z = rg.random_double(0, count);
         cgalNodes.push_back(Vector3((int)i, x,y,z));
-        rustNodes.push_back(Point3WithId{(int)i, x,y,z});
+        rustNodes.push_back(Point3WithId{reinterpret_cast<void*>(i), x,y,z});
     }
 
     Kdtree3Cgal kdtree3Cgal;
@@ -39,6 +39,25 @@ TEST(KdtreeTests, RustAndCgalTreesGiveTheSameResults) {
         auto found_by_cgal = kdtree3Cgal.nearestNeighborSearch(&v);
         auto found_by_kdtree = kdtree_nearest_search(&p);
 
-        ASSERT_EQ(found_by_cgal->id, found_by_kdtree.num);
+        ASSERT_EQ((size_t)found_by_cgal->id, (size_t)found_by_kdtree.pointer);
     }
+}
+
+TEST(KdtreeTests, testThatAllExportedFunctionsWork) {
+    std::vector<Point3WithId> rustNodes;
+    rustNodes.push_back(Point3WithId{(void*)0, 0,0,0});
+
+    kdtree_create(rustNodes.data(), rustNodes.size());
+
+    auto p = Point3WithId{(void*)0, 1,0,0};
+    kdtree_insert_node(&p);
+    p = Point3WithId{(void*)0, 5,0,0};
+    kdtree_insert_node(&p);
+
+    p = Point3WithId{(void*)0,3,0,0};
+    ASSERT_DOUBLE_EQ(4, kdtree_distance_squared_to_nearest(&p));
+    p = Point3WithId{(void*)0,4,0,0};
+    ASSERT_DOUBLE_EQ(1, kdtree_distance_squared_to_nearest(&p));
+    ASSERT_FALSE(kdtree_has_neighbor_in_range(&p, 0.5));
+    ASSERT_TRUE(kdtree_has_neighbor_in_range(&p, 1.1));
 }
